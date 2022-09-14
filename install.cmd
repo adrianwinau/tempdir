@@ -8,14 +8,15 @@ if not exist "%installDir%" goto :createAll
 set /p "input=Temporary Directory Utility already exist. Replace files with new version? [y/n] "
 echo "%input%"
 if /i not "%input%"=="y" goto :abort
-goto :copyNewFiles
+goto :renew
+
+:renew
+rmdir /s /q "%installDir%"
 
 :createAll
 mkdir "%installDir%"
-
-:copyNewFiles
 copy /y ".\tempdir.vbs" "%installDir%\tempdir.vbs"
-copy /y ".\tempdir-main.cmd" "%installDir%\tempdir-main.cmd"
+copy /y ".\tempdir-main.ps1" "%installDir%\tempdir-main.ps1"
 copy /y ".\uninstall.cmd" "%installDir%\uninstall.cmd"
 
 set SCRIPT="%TEMP%\%RANDOM%-%RANDOM%-%RANDOM%-%RANDOM%.vbs"

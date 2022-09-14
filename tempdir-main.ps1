@@ -1,11 +1,3 @@
-@echo off
-%windir%\System32\more +8 "%~f0" > "%temp%\%~n0.ps1"
-powershell -NoProfile -ExecutionPolicy Bypass -File "%temp%\%~n0.ps1" %*
-
-del %temp%\%~n0.ps1
-exit /b
-
-*** Ab hier PowerShell ***
 function New-TempDir() {
     do {
         $dirPath = "$([System.IO.Path]::GetTempPath())tempworkdir-$(Get-Random)"
@@ -21,8 +13,8 @@ Write-Host "#################`n`nThis is the Host of the Temporary Work Director
 
 Get-Process -ProcessName "explorer" | ForEach-Object { $oldPidList += $_.Id }
 $startProcess = Start-Process explorer -ArgumentList "$tempDir"
-Start-Sleep -Seconds 1.0
 do {
+    Start-Sleep -Seconds 1.0
     Get-Process -ProcessName "explorer" | ForEach-Object { 
         if ($_.Id -eq $startProcess.Id) {
             continue

@@ -1,1 +1,1 @@
-CreateObject("Wscript.Shell").Run "tempdir-main.cmd", 0, True
+CreateObject("Wscript.Shell").Run "powershell -NoProfile -ExecutionPolicy Bypass -File tempdir-main.ps1", 0, True
